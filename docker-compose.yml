@@ -23,7 +23,7 @@ services:
             - ./docker/nginx/:/etc/nginx/conf.d/
         networks:
             - sistema-getao-network
-     # db mysql ${DB_DATABASE} //Busca do arquivo .env
+    # db mysql ${DB_DATABASE} //Busca do arquivo .env
     mysql:
         container_name: banco-mysql
         image: mysql:5.7.22
@@ -39,7 +39,6 @@ services:
             - "3388:3306"
         networks:
             - sistema-getao-network
-
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         container_name: phpmyadmin
@@ -52,7 +51,15 @@ services:
             - 8899:80
         networks:
             - sistema-getao-network
-
+    db:
+        image: postgres
+        restart: always
+        #volumes:
+        #    - pgdata: ../../../../PostgreSQL/9.5/data
+        environment:
+            POSTGRES_PASSWORD: 123
+        ports:
+            - 5432:5432
 networks:
     sistema-getao-network:
         driver: bridge
@@ -65,4 +72,3 @@ networks:
 # servidor: mysql
 # user: root
 # pass: root
-
